@@ -17,7 +17,7 @@ import "strings"
 // methods explicitly instead.
 //
 // TODO: results should be returned some other way...
-func ExecuteDirectly(conn Connection, query string, params ...) (results [][]interface{}, err os.Error) {
+func ExecuteDirectly(conn Connection, query string, params ...interface{}) (results [][]interface{}, err os.Error) {
 	var s Statement;
 	s, err = conn.Prepare(query);
 	if err != nil || s == nil {

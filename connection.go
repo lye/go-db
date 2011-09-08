@@ -35,7 +35,7 @@ import "os"
 // operations are allowed on it.
 type Connection interface {
 	Prepare(query string) (Statement, os.Error);
-	Execute(stat Statement, parameters ...) (ResultSet, os.Error);
+	Execute(stat Statement, parameters ...interface{}) (ResultSet, os.Error);
 	Close() os.Error;
 }
 

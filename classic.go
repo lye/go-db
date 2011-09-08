@@ -16,7 +16,7 @@ import "container/vector"
 // returns a ClassicResultSet (see below).
 type ClassicConnection interface {
 	Connection;
-	ExecuteClassic(stat Statement, parameters ...) (ClassicResultSet, os.Error);
+	ExecuteClassic(stat Statement, parameters ...interface{}) (ClassicResultSet, os.Error);
 }
 
 // ClassicResultSets offer the same functionality as regular
