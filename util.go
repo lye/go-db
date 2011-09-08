@@ -54,14 +54,14 @@ func ParseQueryURL(str string) (opt map[string]string, err os.Error) {
 }
 
 func parseQueryHelper(str string, opt map[string]string) (err os.Error) {
-	pairs := strings.Split(str, ";", 0);
+	pairs := strings.Split(str, ";");
 	if len(pairs) == 0 {
 		err = os.NewError("ParseQueryURL: No pairs in " + str);
 		return;	// nothing left to do
 	}
 
 	for _, p := range pairs {
-		pieces := strings.Split(p, "=", 0);
+		pieces := strings.Split(p, "=");
 		// we keep going even if there was an error to fill the
 		// map as much as possible; this means we'll return only
 		// the last error, a tradeoff
