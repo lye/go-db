@@ -17,8 +17,8 @@ import "os"
 // Close() shuts down the iteration mechanism and frees all
 // associated resources.
 type ResultSet interface {
-	Iter() <-chan Result;
-	Close() os.Error;
+	Iter() <-chan Result
+	Close() os.Error
 }
 
 // InformativeResultSets supply useful but optional information.
@@ -29,6 +29,6 @@ type ResultSet interface {
 // Types() returns the names of the types of each item in
 // the result.
 type InformativeResultSet interface {
-	Names() []string;
-	Types() []string;
+	Names() []string
+	Types() []string
 }

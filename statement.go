@@ -12,5 +12,5 @@ import "os"
 // what about resetting the statement or clearing parameter
 // bindings?
 type Statement interface {
-	Close() os.Error;
+	Close() os.Error
 }

@@ -34,9 +34,9 @@ import "os"
 // After a connection has been closed, no further
 // operations are allowed on it.
 type Connection interface {
-	Prepare(query string) (Statement, os.Error);
-	Execute(stat Statement, parameters ...interface{}) (ResultSet, os.Error);
-	Close() os.Error;
+	Prepare(query string) (Statement, os.Error)
+	Execute(stat Statement, parameters ...interface{}) (ResultSet, os.Error)
+	Close() os.Error
 }
 
 // InformativeConnections supply useful but optional information.
@@ -50,9 +50,9 @@ type Connection interface {
 // the database. The database driver has to explain the exact
 // meaning of the id and the conditions under which it changes.
 type InformativeConnection interface {
-	Connection;
-	Changes() (int, os.Error);
-	LastId() (int, os.Error);
+	Connection
+	Changes() (int, os.Error)
+	LastId() (int, os.Error)
 }
 
 // TransactionalConnections support transactions. Note that
@@ -69,8 +69,8 @@ type InformativeConnection interface {
 // Rollback() tries to undo all changes made as part of the
 // current transaction.
 type TransactionalConnection interface {
-	Connection;
-	Begin() os.Error;
-	Commit() os.Error;
-	Rollback() os.Error;
+	Connection
+	Begin() os.Error
+	Commit() os.Error
+	Rollback() os.Error
 }

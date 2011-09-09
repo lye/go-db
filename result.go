@@ -16,8 +16,8 @@ import "os"
 // Error() returns the error that occurred when this
 // result was fetched, or nil if no error occurred.
 type Result interface {
-	Data() []interface{};
-	Error() os.Error;
+	Data() []interface{}
+	Error() os.Error
 }
 
 // FancyResults provide an alternate way of processing results.
@@ -29,7 +29,7 @@ type Result interface {
 // TypeMap() returns a map from item names to the names of the
 // types of each item.
 type FancyResult interface {
-	Result;
-	DataMap() map[string]interface{};
-	TypeMap() map[string]string;
+	Result
+	DataMap() map[string]interface{}
+	TypeMap() map[string]string
 }

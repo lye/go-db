@@ -15,8 +15,8 @@ import "container/vector"
 // ExecuteClassic() is similar to Execute() except that it
 // returns a ClassicResultSet (see below).
 type ClassicConnection interface {
-	Connection;
-	ExecuteClassic(stat Statement, parameters ...interface{}) (ClassicResultSet, os.Error);
+	Connection
+	ExecuteClassic(stat Statement, parameters ...interface{}) (ClassicResultSet, os.Error)
 }
 
 // ClassicResultSets offer the same functionality as regular
@@ -30,36 +30,36 @@ type ClassicConnection interface {
 // set. After a call to close, no operations can be applied
 // anymore.
 type ClassicResultSet interface {
-	More() bool;
-	Fetch() Result;
-	Close() os.Error;
+	More() bool
+	Fetch() Result
+	Close() os.Error
 }
 
 // Fetch all remaining results. If we get no results at
 // all, an error will be returned; otherwise it probably
 // still occurred but will be hidden.
 func ClassicFetchAll(rs ClassicResultSet) (data [][]interface{}, error os.Error) {
-	var v vector.Vector;
+	var v vector.Vector
 	var d interface{}
-	var e os.Error;
+	var e os.Error
 
 	for rs.More() {
-		r := rs.Fetch();
-		d = r.Data();
+		r := rs.Fetch()
+		d = r.Data()
 		if d != nil {
 			v.Push(d)
 		}
-		e = r.Error();
+		e = r.Error()
 		if e != nil {
 			break
 		}
 	}
 
-	l := v.Len();
+	l := v.Len()
 
 	if l > 0 {
 		// TODO: how can this be done better?
-		data = make([][]interface{}, l);
+		data = make([][]interface{}, l)
 		for i := 0; i < l; i++ {
 			data[i] = v.At(i).([]interface{})
 		}
@@ -68,22 +68,22 @@ func ClassicFetchAll(rs ClassicResultSet) (data [][]interface{}, error os.Error)
 		error = e
 	}
 
-	return;
+	return
 }
 
 // Fetch at most count results. If we get no results at
 // all, an error will be returned; otherwise it probably
 // still occurred but will be hidden.
 func ClassicFetchMany(rs ClassicResultSet, count int) (data [][]interface{}, error os.Error) {
-	d := make([][]interface{}, count);
-	l := 0;
-	var e os.Error;
+	d := make([][]interface{}, count)
+	l := 0
+	var e os.Error
 
 	// grab at most count results
 	for l < count {
-		r := rs.Fetch();
-		d[l] = r.Data();
-		e = r.Error();
+		r := rs.Fetch()
+		d[l] = r.Data()
+		e = r.Error()
 		if e == nil {
 			l += 1
 		} else {
@@ -95,7 +95,7 @@ func ClassicFetchMany(rs ClassicResultSet, count int) (data [][]interface{}, err
 		// there were results
 		if l < count {
 			// but fewer than expected, need fresh copy
-			data = make([][]interface{}, l);
+			data = make([][]interface{}, l)
 			for i := 0; i < l; i++ {
 				data[i] = d[i]
 			}
@@ -107,5 +107,5 @@ func ClassicFetchMany(rs ClassicResultSet, count int) (data [][]interface{}, err
 		error = e
 	}
 
-	return;
+	return
 }
