@@ -27,7 +27,7 @@ func ExecuteDirectly(conn Connection, query string, params ...interface{}) (resu
 
 	var c ClassicResultSet;
 	con := conn.(ClassicConnection);
-	c, err = con.ExecuteClassic(s, params);
+	c, err = con.ExecuteClassic(s, params...);
 	if err != nil || c == nil {
 		return
 	}
